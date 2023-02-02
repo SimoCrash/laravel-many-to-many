@@ -2,11 +2,12 @@
 
 @section('content')
     <div class="container">
-        <form action="{{ route('admin.categories.store') }}" method="post" class="row g-3 needs-validation" novalidate>
+        <form action="{{ route('admin.categories.update', ['category' => $category]) }}" method="post" class="row g-3 needs-validation" novalidate>
+        @method('PUT')
         @csrf
           <div class="mb-3">
             <label for="name" class="form-label">Nome</label>
-            <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name') }}">
+            <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name', $category->name) }}">
             <div class="invalid-feedback">
               @error('name')
                   <ul>
@@ -21,7 +22,7 @@
               <label for="slug" class="form-label">Slug</label>
               <div class="row">
                 <div class="col-9">
-                    <input type="text" class="form-control @error('slug') is-invalid @enderror" id="slug" name="slug" value="{{ old('slug') }}">
+                    <input type="text" class="form-control @error('slug') is-invalid @enderror" id="slug" name="slug" value="{{ old('slug', $category->slug) }}">
                     <div class="invalid-feedback">
                         @error('slug')
                             <ul>
@@ -52,7 +53,7 @@
 
           <div class="mb-3">
               <label for="description" class="form-label">Descrizione</label>
-              <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description">{{ old('description') }}</textarea>
+              <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description">{{ old('description', $category->description) }}</textarea>
               <div class="invalid-feedback">
                   @error('content')
                   <ul>
@@ -65,7 +66,7 @@
           </div>
           
           <div class="col-12">
-            <button class="btn btn-primary" type="submit">Crea</button>
+            <button class="btn btn-primary" type="submit">Aggiorna</button>
           </div>
         </form>
     </div>
