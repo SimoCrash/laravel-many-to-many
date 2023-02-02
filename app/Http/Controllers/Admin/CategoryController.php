@@ -26,7 +26,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.categories.create');
     }
 
     /**
@@ -37,7 +37,23 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //validare
+        $request->validate([
+            'name' => 'required|string|max:100',
+            'slug' => 'required|string|max:100|unique:categories',
+            'description' => 'nullable|string',
+        ]);
+        $data = $request->all();
+
+        //salvare nel DB
+        $category = new Category;
+        $category->name = $data['name'];
+        $category->slug = $data['slug'];
+        $category->description = $data['description'];
+        $category->save();
+
+        //ridirezionare i dati
+        return redirect()->route('admin.categories.show', ['category' => $category]);
     }
 
     /**
