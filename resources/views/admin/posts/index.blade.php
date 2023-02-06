@@ -25,6 +25,11 @@
                       <td>{{ $post->title }}</td>
                       <td>{{ $post->category->name }}</td>
                       <td>
+                        @foreach($post->tags as $tag)
+                        {{ $tag->name }}{{ $loop->last ? "" : ", "}}
+                        @endforeach
+                      </td>
+                      <td>
                           {{-- <a href="/posts/{{ $post->id }}" class="btn btn-primary">Visita</a> --}}
                           <a href="{{ route('admin.posts.show', ['post' => $post])}}" class="btn btn-primary">Visit</a>
                       </td>
