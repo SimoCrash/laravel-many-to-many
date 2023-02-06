@@ -11,7 +11,7 @@
           <thead>
             <tr>
               <th scope="col">ID</th>
-              <th scope="col">Slag</th>
+              <th scope="col">Slug</th>
               <th scope="col">Title</th>
               <th scope="col">Categoria</th>
               <th scope="col">Actions</th>
@@ -21,7 +21,7 @@
               @foreach ($posts as $post)
                   <tr>
                       <td>{{ $post->id }}</td>
-                      <td>{{ $post->slag }}</td>
+                      <td>{{ $post->slug }}</td>
                       <td>{{ $post->title }}</td>
                       <td>{{ $post->category->name }}</td>
                       <td>

@@ -17,6 +17,10 @@ class Tag extends Model
         }
         return $slug;
     }
+
+    public function posts(){
+        return $this->belongsToMany('App\Post');
+    }
     public $timestamps = false;
 
 }

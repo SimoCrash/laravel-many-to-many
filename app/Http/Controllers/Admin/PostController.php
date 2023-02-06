@@ -48,7 +48,7 @@ class PostController extends Controller
     {
         //validation
         $request->validate([
-            'slag'      => 'required|string|max:100|unique:posts',
+            'slug'      => 'required|string|max:100|unique:posts',
             'title'     => 'required|string|max:100',
             'category_id'     => 'required|integer|exists:categories,id',
             'image'     => 'string|max:100',
@@ -65,7 +65,7 @@ class PostController extends Controller
 
         //salvare i dati nel db
         $post = new Post;
-        $post->slag = $data['slag']; 
+        $post->slug = $data['slug']; 
         $post->title = $data['title'];
         $post->image = $data['image'];
         $post->uploaded_img = $img_path;
@@ -110,7 +110,7 @@ class PostController extends Controller
     {
         //validation
         $request->validate([
-            'slag'      => [
+            'slug'      => [
                 'required',
                 'string',
                 'max:100',
@@ -132,7 +132,7 @@ class PostController extends Controller
         Storage::delete($post->uploaded_img);
 
         //salvare i dati nel db
-        $post->slag = $data['slag']; 
+        $post->slug = $data['slug']; 
         $post->title = $data['title'];
         $post->image = $data['image'];
         $post->uploaded_img = $img_path;

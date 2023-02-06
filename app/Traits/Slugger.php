@@ -9,7 +9,7 @@ trait Slugger {
         $slugBase = Str::slug($text);
         $slug = $slugBase;
         $i = 1;
-        while(self::where('slag', $slug)->first()){
+        while(self::where('slug', $slug)->first()){
             $slug = $slugBase . '-' . $i;
             $i++;
         }

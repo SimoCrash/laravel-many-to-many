@@ -18,12 +18,12 @@
             </div>
           </div>
           <div class="mb-3">
-              <label for="slag" class="form-label">Slag</label>
-              <input type="text" class="form-control @error('slag') is-invalid @enderror" id="slag" name="slag" value="{{ old('slag') }}">
+              <label for="slug" class="form-label">Slug</label>
+              <input type="text" class="form-control @error('slug') is-invalid @enderror" id="slug" name="slug" value="{{ old('slug') }}">
               <div class="invalid-feedback">
-              @error('slag')
+              @error('slug')
                   <ul>
-                    @foreach ($errors->get('slag') as $error)
+                    @foreach ($errors->get('slug') as $error)
                         <li>{{ $error }}</li>
                     @endforeach  
                   </ul>
