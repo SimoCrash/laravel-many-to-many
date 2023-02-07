@@ -47,6 +47,32 @@
               @enderror
               </div>
           </div>
+          <div class="col-12">
+            <h2>Tags</h2>
+            @foreach ($tags as $tag)
+              <div class="form-check">
+                  <input 
+                      id="tag-{{ $tag->id }}"
+                      class="form-check-input @error('tags') is-invalid @enderror" 
+                      type="checkbox" 
+                      value="tag-{{ $tag->id }}"
+                      name="tags[]" 
+                  >
+                  <label class="form-check-label" for="tag-{{ $tag->id }}">
+                    {{ $tag->name }}
+                  </label>
+                  <div class="invalid-feedback">
+                    @error('tags')
+                      <ul>
+                        @foreach ($errors->get('tags') as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach  
+                      </ul>
+                    @enderror
+                  </div>
+              </div>
+            @endforeach
+          </div>
           <div class="mb-3">
               <label for="image" class="form-label">Url Immagine</label>
               <input type="url" class="form-control @error('image') is-invalid @enderror" id="image" name="image" value="{{ old('image') }}">

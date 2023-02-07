@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Tag;
 use App\Post;
 use App\Category;
 use Illuminate\Http\Request;
@@ -33,8 +34,11 @@ class PostController extends Controller
     public function create()
     {
         $categories = Category::all('id', 'name');
+        $tags = Tag::all();
+
         return view('admin.posts.create', [
             'categories' => $categories,
+            'tags' => $tags,
         ]);
     }
 
@@ -67,11 +71,15 @@ class PostController extends Controller
         $post = new Post;
         $post->slug = $data['slug']; 
         $post->title = $data['title'];
+        $post->category_id = $data['category_id'];
+        $post->tags = $data['tags'];
         $post->image = $data['image'];
         $post->uploaded_img = $img_path;
         $post->content = $data['content']; 
         $post->except = $data['except'];
         $post->save();
+
+        $post->tags()->attach($data['tags']);
 
         //ridirezione 
         return redirect()->route('admin.posts.show', ['post' => $post]);            
@@ -96,6 +104,14 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
+        $categories = Category::all('id', 'name');
+        $tags = Tag::all();
+
+        return view('admin.posts.edit', [
+            'post' => $post,
+            'categories' => $categories,
+            'tags' => $tags,
+        ]);
         return view('admin.posts.edit', compact('post'));
     }
 
@@ -152,6 +168,7 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
+        $post->tags()->detach();
         $post->delete();
         return redirect()->route('admin.posts.index')->with('success_delete', $post);
     }
