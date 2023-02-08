@@ -59,9 +59,7 @@
                             type="checkbox" 
                             value="{{ $tag->id }}"
                             name="tags[]" 
-                            @if (in_array($tag->id, ))
-                                
-                            @endif
+                            @if (in_array($tag->id, old('tags', $post->tags->pluck('id')->all()))) checked @endif   
                         >
                         <label class="form-check-label" for="tag-{{ $tag->id }}">
                           {{ $tag->name }}

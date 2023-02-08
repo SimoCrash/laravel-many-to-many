@@ -27,7 +27,7 @@
                       <td>{{ $category->name }}</td>
                       <td>
                           {{-- <a href="/posts/{{ $category->id }}" class="btn btn-primary">Visita</a> --}}
-                          <a href="{{ route('admin.categories.show', ['category' => $category->id])}}" class="btn btn-primary">Visit</a>
+                          <a href="{{ route('admin.categories.show', ['category' => $category])}}" class="btn btn-primary">Visit</a>
                       </td>
                       <td>
                           <a href="{{ route('admin.categories.edit', ['category' => $category])}}" class="btn btn-warning">Edit</a>

@@ -143,7 +143,13 @@ class PostController extends Controller
         //richiesta dati al db
         $data = $request->all();
 
-        $img_path = isset($data['uploaded_img']) ? Storage::put('uploads', $data['uploaded_img']) : null;
+        if(isset($data['uploaded_img'])){
+            $img_path = Storage::put('uploads', $data['uploaded_img']);
+            Storage::delete($post->uploaded_img);
+        } else {
+            $img_path = $post->uploaded_img;
+        }
+        
 
         Storage::delete($post->uploaded_img);
 
@@ -155,6 +161,8 @@ class PostController extends Controller
         $post->content = $data['content']; 
         $post->except = $data['except'];
         $post->update();
+
+        $post->tags()->sync($data['tags']);
 
         //ridirezione 
         return redirect()->route('admin.posts.show', ['post' => $post]);

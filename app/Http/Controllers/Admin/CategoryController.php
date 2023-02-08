@@ -130,4 +130,6 @@ class CategoryController extends Controller
         //ridirezione
         return redirect()->route('admin.categories.index')->with('success_delete', $category);
     }
+
+
 }
